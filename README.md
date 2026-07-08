@@ -35,6 +35,7 @@
 ### 步骤三：创建项目文件夹并编写网页
 
 在桌面新建文件夹 `web实验1`，在 VSCode 中通过“文件”->“打开文件夹”打开该目录。新建 `index.html` 文件，输入以下 HTML 代码：
+<img width="1199" height="495" alt="establish" src="https://github.com/user-attachments/assets/c639258f-cb40-4349-aa9d-0b49a660f539" />
 
 ```html
 <!DOCTYPE html>
@@ -49,5 +50,5 @@
     <p>我是刘天东</p>
 </body>
 </html>
-<img width="1199" height="495" alt="establish" src="https://github.com/user-attachments/assets/3eaab72a-cf7d-45be-b776-21485dbd7dfe" />
+
 
