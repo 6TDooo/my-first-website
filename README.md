@@ -18,7 +18,7 @@
 
 访问 VSCode 官网（https://code.visualstudio.com/），下载 Windows 版本安装包。双击运行安装程序，按照向导提示完成安装。
 
-![VSCode安装界面](./images/3VScode安装界面.png)
+![VSCode安装界面](./images/install%20VScode.png)
 *图1：VSCode 安装程序启动界面*
 
 ### 步骤二：安装 Live Server 插件
@@ -27,13 +27,13 @@
 
 安装完成后，VSCode 右下角会出现蓝色的“Go Live”按钮，表示插件已生效。
 
-![Live Server插件页面](./images/2安装插件live server.png)
+![Live Server插件页面](./images/install%20live%20server.png)
 *图2：VSCode 扩展商店中的 Live Server 插件*
 
 ### 步骤三：创建项目文件夹并编写网页
 
 在桌面新建文件夹 `web实验1`，在 VSCode 中通过“文件”->“打开文件夹”打开该目录。新建 `index.html` 文件，输入以下 HTML 代码：
-
+![web开发环境](./images/establish.png)
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
