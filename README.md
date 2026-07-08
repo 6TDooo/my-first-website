@@ -28,7 +28,8 @@
 
 安装完成后，VSCode 右下角会出现蓝色的“Go Live”按钮，表示插件已生效。
 
-![Live Server插件页面](./images/2安装插件live server.png)
+<img width="427" height="288" alt="install live server" src="https://github.com/user-attachments/assets/7e0f7746-eec8-44c5-bbf7-74128016722e" />
+
 *图2：VSCode 扩展商店中的 Live Server 插件*
 
 ### 步骤三：创建项目文件夹并编写网页
