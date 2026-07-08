@@ -18,7 +18,8 @@
 
 访问 VSCode 官网（https://code.visualstudio.com/），下载 Windows 版本安装包。双击运行安装程序，按照向导提示完成安装。
 
-![VSCode安装界面](./images/3VScode安装界面.png)
+<img width="560" height="521" alt="install VScode" src="https://github.com/user-attachments/assets/85a80f2d-4569-4808-acbd-d464a051430c" />
+
 *图1：VSCode 安装程序启动界面*
 
 ### 步骤二：安装 Live Server 插件
