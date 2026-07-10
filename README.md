@@ -448,7 +448,7 @@ text
 
 ### Part 1：文件导航
 
-```bash
+bash
 pwd
 ls
 cd Desktop
@@ -460,24 +460,24 @@ cd ~
 
 ### Part 2：文件操作
 
-- `mkdir linux_test` ：创建了 `linux_test` 文件夹。
-- `cd linux_test` ：进入 `linux_test` 文件夹。
-- `touch hello.txt` ：创建空白文件 `hello.txt`。
-- `echo "hello,linux" > hello.txt` ：向 `hello.txt` 写入内容 `hello,linux`。
-- `cat hello.txt` ：查看文件内容，输出 `hello,linux`。
-- `cp hello.txt hello_copy.txt` ：复制 `hello.txt`，生成 `hello_copy.txt`。
-- `mv hello.txt hello_new.txt` ：将 `hello.txt` 重命名为 `hello_new.txt`。
-- `rm hello_copy.txt` ：删除 `hello_copy.txt`。
-- `ls` ：确认当前目录下只剩下 `hello_new.txt`。
+`mkdir linux_test` ：创建了 `linux_test` 文件夹。
+`cd linux_test` ：进入 `linux_test` 文件夹。
+`touch hello.txt` ：创建空白文件 `hello.txt`。
+`echo "hello,linux" > hello.txt` ：向 `hello.txt` 写入内容 `hello,linux`。
+`cat hello.txt` ：查看文件内容，输出 `hello,linux`。
+`cp hello.txt hello_copy.txt` ：复制 `hello.txt`，生成 `hello_copy.txt`。
+`mv hello.txt hello_new.txt` ：将 `hello.txt` 重命名为 `hello_new.txt`。
+`rm hello_copy.txt` ：删除 `hello_copy.txt`。
+`ls` ：确认当前目录下只剩下 `hello_new.txt`。
 
 ![文件操作截图](./images/File%20Manipulation.png)
 *图2：文件操作*
 
 ### Part 3：软件包管理
 
-- `sudo apt update` ：更新本地软件包列表。
-- `sudo apt install fastfetch -y` ：安装 `fastfetch` 工具，`-y` 自动确认。
-- `fastfetch` ：运行 `fastfetch`，显示系统信息。
+`sudo apt update` ：更新本地软件包列表。
+`sudo apt install fastfetch -y` ：安装 `fastfetch` 工具，`-y` 自动确认。
+`fastfetch` ：运行 `fastfetch`，显示系统信息。
 
 ![软件安装截图](./images/APP%20installing.png)
 *图3：软件安装*
@@ -517,7 +517,7 @@ cd ~
 
 **常用示例：**
 
-```bash
+bash
 touch hello.txt                 # 新建文件
 cat hello.txt                   # 查看文件
 echo "hello" > hello.txt        # 写入内容
@@ -574,8 +574,8 @@ sudo apt install fastfetch -y   # 安装软件
 
 用户与组命令：`sudo useradd` 创建用户，`sudo passwd` 设置密码，`sudo userdel -r` 删除用户，`sudo groupadd` 创建组，`sudo usermod -aG` 将用户加入组，`id` 查看用户信息。文件权限中 `r`（4）读、`w`（2）写、`x`（1）执行，三组分别对应所有者（u）、所属组（g）、其他用户（o）。`chmod` 修改权限（如 `chmod 755`），`sudo chown` 修改所有者，`sudo chgrp` 修改所属组，`ls -l` 查看权限。数字组合中 7=rwx、6=rw-、5=r-x、4=r--，常用 755 用于目录、644 用于普通文件、600 用于私密文件。
 
-# 实验六：Linux 环境配置
 
+# 实验六：Linux 环境配置
 
 ## 1、实验目的
 
@@ -585,7 +585,6 @@ sudo apt install fastfetch -y   # 安装软件
 ## 2、实验环境
 
 | 项目 | 说明 |
-|------|------|
 | 操作系统 | Ubuntu 26.04 LTS |
 | 终端 | GNOME Terminal |
 
