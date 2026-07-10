@@ -563,7 +563,7 @@ sudo apt install fastfetch -y   # 安装软件
 **文件权限管理：** 用 `touch test_permission.txt` 创建文件并写入内容，`ls -l` 查看权限格式（`-rw-r--r--`），其中 `r` 读、`w` 写、`x` 执行，三组分别对应所有者、组、其他用户。用 `chmod 755`、`644`、`600` 修改权限并用 `ls -l` 观察变化（755 适用于目录，644 适用于普通文件，600 适用于私密文件）。用 `sudo chown testuser test_permission.txt` 修改所有者，`sudo chgrp devgroup test_permission.txt` 修改所属组，`ls -l` 确认变化。实验结束后执行 `rm test_permission.txt`、`sudo userdel -r testuser`、`sudo groupdel devgroup` 清理。
 
 ![文件权限管理](./images/file%20permission%20management.png)
-*图4：文件权限管理 运行结果*
+*图3：文件权限管理 运行结果*
 
 ## 4、实验结果
 
@@ -574,3 +574,60 @@ sudo apt install fastfetch -y   # 安装软件
 
 用户与组命令：`sudo useradd` 创建用户，`sudo passwd` 设置密码，`sudo userdel -r` 删除用户，`sudo groupadd` 创建组，`sudo usermod -aG` 将用户加入组，`id` 查看用户信息。文件权限中 `r`（4）读、`w`（2）写、`x`（1）执行，三组分别对应所有者（u）、所属组（g）、其他用户（o）。`chmod` 修改权限（如 `chmod 755`），`sudo chown` 修改所有者，`sudo chgrp` 修改所属组，`ls -l` 查看权限。数字组合中 7=rwx、6=rw-、5=r-x、4=r--，常用 755 用于目录、644 用于普通文件、600 用于私密文件。
 
+# 实验六：Linux 环境配置
+
+
+## 1、实验目的
+
+掌握 Linux 环境变量、命令别名和配置文件的管理，熟悉 `export`、`alias`、`~/.bashrc` 的使用，理解临时配置与永久配置的区别。
+
+
+## 2、实验环境
+
+| 项目 | 说明 |
+|------|------|
+| 操作系统 | Ubuntu 26.04 LTS |
+| 终端 | GNOME Terminal |
+
+
+## 3、实验过程
+
+首先使用 `echo $PATH` 和 `env` 查看当前系统的环境变量，了解系统查找命令的路径和当前会话的所有变量。
+
+然后用 `export MY_NAME="Liu"` 创建一个自定义变量，用 `echo $MY_NAME` 验证创建成功。为了让配置永久生效，用 `nano ~/.bashrc` 编辑用户级配置文件，在文件末尾添加 `export MY_NAME="Liu"`，保存退出后用 `source ~/.bashrc` 使配置立即生效，之后关闭终端重新打开，输入 `echo $MY_NAME` 验证变量依然存在。
+
+![变量永久保存](./images/environment%20variable%20permanent.png)
+*图1：变量永久保存 结果展示*
+
+接着用 `alias h='history'` 设置命令别名，输入 `h` 即可查看历史命令列表，验证别名生效。
+
+![设置别名](./images/alias%20history%201.png)
+![设置别名](./images/alias%20history%202.png)
+*图2：别名运行展示*
+
+最后用 `cat /etc/environment` 和 `cat /etc/profile` 查看系统级全局配置文件，理解用户级配置（`~/.bashrc`）仅对当前用户生效，系统级配置（`/etc/environment`、`/etc/profile`）对所有用户生效。
+
+![查看系统级全局配置文件](./images/bashrc%20edit.png)
+*图3：系统全局配置文件*
+
+## 4、实验结果
+
+| 任务 | 核心命令 | 状态 |
+|------|----------|------|
+| 查看环境变量 | `echo $PATH`、`env` | ✅ |
+| 创建自定义变量 | `export MY_NAME="Liu"`、`echo $MY_NAME` | ✅ |
+| 永久配置生效 | `nano ~/.bashrc`、`source ~/.bashrc` | ✅ |
+| 设置命令别名 | `alias h='history'`、`h` | ✅ |
+
+
+## 5、知识总结
+
+环境变量用 `export` 创建，用 `echo $变量名` 查看，临时变量仅在当前终端有效，需写入 `~/.bashrc` 并执行 `source` 才能永久生效。命令别名用 `alias` 设置，同样写入 `~/.bashrc` 可永久生效。`~/.bashrc` 是用户级配置文件，仅对当前用户生效；`/etc/environment` 和 `/etc/profile` 是系统级配置文件，对所有用户生效。
+
+
+## 6、出现问题及解决方案
+
+| 问题 | 解决方案 |
+|------|----------|
+| 终端提示符变成 `>` | 按 `Ctrl+C` 退出，输入 `clear` 清屏后重新输入命令 |
+| 环境变量关掉终端后消失 | 将 `export` 写入 `~/.bashrc` 后执行 `source ~/.bashrc` |
