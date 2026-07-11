@@ -570,10 +570,13 @@ sudo apt install fastfetch -y   # 安装软件
 成功完成用户管理（`sudo useradd`、`sudo passwd`、`id`）、组管理（`sudo groupadd`、`sudo usermod -aG`）和文件权限管理（`chmod`、`chown`、`chgrp`）三项任务，所有命令均正常执行。
 
 
-## 5、知识总结
+## 5、第五个实验知识点总结
 
 用户与组命令：`sudo useradd` 创建用户，`sudo passwd` 设置密码，`sudo userdel -r` 删除用户，`sudo groupadd` 创建组，`sudo usermod -aG` 将用户加入组，`id` 查看用户信息。文件权限中 `r`（4）读、`w`（2）写、`x`（1）执行，三组分别对应所有者（u）、所属组（g）、其他用户（o）。`chmod` 修改权限（如 `chmod 755`），`sudo chown` 修改所有者，`sudo chgrp` 修改所属组，`ls -l` 查看权限。数字组合中 7=rwx、6=rw-、5=r-x、4=r--，常用 755 用于目录、644 用于普通文件、600 用于私密文件。
 
+## 6、心得体会
+
+通过本次实验，我掌握了 Linux 用户管理、组管理和文件权限管理的基本操作。一开始我对 `sudo` 的作用不太理解，后来才明白它是临时获取管理员权限的关键，而普通用户权限受限是为了保证系统安全。在文件权限部分，我理解了 `rwx`（读、写、执行）的含义以及 `chmod` 数字法和字母法的使用逻辑，比如 `755` 和 `644` 分别适用于目录和普通文件。通过实际操作创建用户、组并修改文件所有者，我认识到 Linux 系统通过“用户-组-权限”三层结构实现了精细化的访问控制，这对系统安全和多用户协作至关重要。同时我也体会到，权限管理不仅是一项技术操作，更是一种系统设计思维的体现——通过最小权限原则降低安全风险。
 
 # 实验六：Linux 环境配置
 
@@ -630,3 +633,72 @@ sudo apt install fastfetch -y   # 安装软件
 |------|----------|
 | 终端提示符变成 `>` | 按 `Ctrl+C` 退出，输入 `clear` 清屏后重新输入命令 |
 | 环境变量关掉终端后消失 | 将 `export` 写入 `~/.bashrc` 后执行 `source ~/.bashrc` |
+
+## 7、心得体会
+
+通过本次实验，我掌握了 Linux 环境变量和命令别名的配置方法。一开始我不太理解为什么要改 `~/.bashrc` 文件，觉得直接用 `export` 和 `alias` 就够了，但关掉终端重新打开后发现之前设置的变量全部失效，这才明白**临时配置和永久配置的区别**——临时变量只对当前会话生效，只有写入配置文件才能持久化保存。我也理解了用户级配置文件（`~/.bashrc`）和系统级配置文件（`/etc/environment`、`/etc/profile`）的区别：前者只影响当前用户，后者影响所有用户。环境变量和别名看似不起眼，但在日常开发中能极大提升效率，比如把冗长的命令简化为几个字母。本次实验让我意识到，一个好的开发环境不是“装好就能用”的，而是需要根据个人习惯不断优化和配置，这种“让工具适应人”的思路对后续学习和工作都很有帮助。
+
+# 实验七：远程管理
+
+## 1、实验目的
+
+掌握 SSH 远程登录、SCP 文件传输和 Git 服务的基本配置与使用，理解远程管理工具在 Linux 系统管理中的作用。
+
+
+## 2、实验环境
+
+| 项目 | 说明 |
+|------|------|
+| 宿主机操作系统 | Windows 11 |
+| 虚拟机操作系统 | Ubuntu 26.04 LTS |
+| SSH 服务 | OpenSSH Server |
+| 连接方式 | SSH 端口转发（NAT 模式） |
+
+
+## 3、实验过程
+
+在 Ubuntu 终端中执行 `sudo apt update` 更新软件源，然后执行 `sudo apt install openssh-server -y` 安装 SSH 服务，安装完成后执行 `sudo systemctl status ssh` 确认服务处于 `active (running)` 状态，说明 SSH 服务已正常运行。
+
+![ssh服务正常运行](./images/active%20running.png)
+*图1：ssh服务 结果展示*
+
+接着执行 `hostname -I` 查看虚拟机的 IP 地址为 `10.0.2.15`。由于虚拟机使用 NAT 网络模式，宿主机无法直接访问该 IP，因此在 VirtualBox 中设置端口转发：将主机的 `2222` 端口映射到虚拟机的 `22` 端口。设置完成后在 Windows 命令提示符中执行 `ssh -p 2222 ubuntu@127.0.0.1` 连接 Ubuntu，输入密码后登录成功。文件传输使用 `scp` 命令，先在 Windows 本地创建 `test.txt` 文件，然后执行 `scp -P 2222 test.txt ubuntu@127.0.0.1:/home/ubuntu/` 将文件传到 Ubuntu 的家目录中，登录 Ubuntu 后执行 `ls` 确认 `test.txt` 已成功传输。
+
+![文件传输1](./images/transport.png)
+![文件传输2](./images/file%20transport.png)
+*图2：文件传输 结果展示*
+
+Git 服务架设方面，在 Ubuntu 终端执行 `sudo apt install git -y` 安装 Git，安装完成后执行 `git --version` 确认版本号为 `git version 2.53.0`，表明 Git 服务已架设成功。
+
+![git服务架设](./images/git%20service%20setting.png)
+*图3：git服务架设*
+
+
+## 4、实验结果
+
+| 任务 | 核心命令 | 状态 |
+|------|----------|------|
+| SSH 服务安装与启动 | `sudo apt install openssh-server`、`sudo systemctl status ssh` | ✅ |
+| 端口转发配置 | VirtualBox 网络设置 → 端口转发 | ✅ |
+| SSH 远程登录 | `ssh -p 2222 ubuntu@127.0.0.1` | ✅ |
+| SCP 文件传输 | `scp -P 2222 test.txt ubuntu@127.0.0.1:/home/ubuntu/` | ✅ |
+| Git 安装与验证 | `sudo apt install git -y`、`git --version` | ✅ |
+
+
+## 5、第六个实验知识点总结
+
+SSH（Secure Shell）是一种加密网络协议，用于在不安全网络中实现安全的远程登录和命令执行。SCP（Secure Copy）基于 SSH 协议实现加密文件传输。NAT 模式下宿主机无法直接访问虚拟机，需通过端口转发将虚拟机服务端口映射到宿主机端口。Git 是分布式版本控制系统，安装后可通过 SSH 协议进行远程仓库操作。常用命令：`ssh -p 端口 用户@地址` 远程登录，`scp -P 端口 本地文件 用户@地址:远程路径` 上传文件，`git --version` 验证 Git 安装。
+
+
+## 6、出现问题及解决方案
+
+| 问题 | 解决方案 |
+|------|----------|
+| SSH 连接失败或 ping 不通 | 设置端口转发，将主机 2222 端口映射到虚拟机 22 端口 |
+| 第一次连接提示密钥验证 | 输入 `yes` 确认，系统自动保存到 `known_hosts` |
+| SCP 命令报错 `No such file or directory` | 确认本地文件存在且路径正确，或使用绝对路径 |
+
+
+## 7、心得体会
+
+通过本次实验，我掌握了 SSH 远程登录、SCP 文件传输和 Git 服务架设的基本方法，理解了端口转发在 NAT 网络模式下的作用。SSH 作为 Linux 远程管理的核心工具，在服务器运维和团队协作中具有重要价值。本次实验为后续的 Web 部署和团队协作奠定了基础。
